@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Error - Connection Lost</title>
+    <style>
+        :root {
+            /* 記得將此處路徑改為妳實際的圖片名稱 */
+            --cat-url: url("./img/cat.png");
+        }
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #050505;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        /* 表面層：冰冷的控制台 */
+        #console-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            z-index: 20;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .code-line { color: #00ff33; font-size: 16px; line-height: 1.8; margin: 0; white-space: nowrap; }
+        .error-text { color: #ff3333; font-weight: bold; margin-top: 20px; animation: blink 1s infinite; }
+
+        .fix-btn {
+            margin-top: 30px; padding: 12px 24px; background-color: transparent;
+            border: 2px solid #ff3333; color: #ff3333; font-family: inherit;
+            font-size: 16px; font-weight: bold; cursor: pointer; width: fit-content; transition: all 0.3s;
+        }
+        .fix-btn:hover { background-color: #ff3333; color: #050505; box-shadow: 0 0 15px #ff3333; }
+
+        /* 隱藏層：單張完整貓咪圖片 */
+        #love-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            
+            /* 核心：圖片置中、高度填滿、不重複 */
+            background-image: var(--cat-url);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain; 
+        }
+
+        /* 告白文字浮層 */
+        .overlay-message {
+            position: absolute;
+            top: 80%; /* 往下移一點，避免遮住貓咪臉 */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+        }
+
+        .overlay-message h1 { margin: 0 0 10px 0; font-size: 24px; color: #ff4d6d; }
+        .overlay-message p { margin: 0; font-size: 14px; color: #ddd; }
+
+        /* 觸發後的狀態 */
+        body.is-fixed #console-layer { opacity: 0; pointer-events: none; }
+        body.is-fixed #love-layer { opacity: 1; }
+        body.is-fixed .overlay-message { opacity: 1; }
+
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div id="console-layer">
+        <p class="code-line">[INFO] Initializing core emotional database...</p>
+        <p class="code-line">[SUCCESS] Target database "YX0316" located successfully.</p>
+        <p class="code-line">[INFO] Attempting to establish a permanent connection...</p>
+        <p class="code-line">[WARNING] Heartbeat interval timeout (Infinite love loops detected).</p>
+        <p class="code-line error-text">[ERROR] 520_HEART_OVERFLOW: Life logic cannot continue without YX0316.</p>
+        <button class="fix-btn" onclick="triggerLove()">🔧 Fix System Bug</button>
+    </div>
+
+    <div id="love-layer">
+        <div class="overlay-message">
+            <h1>Connection Established ❤️</h1>
+            <p>520 連線成功。核心 Bug 已完美修復。</p>
+            <p>You are my only return value in the code.></p>
+        </div>
+    </div>
+
+    <script>
+        function triggerLove() {
+            document.body.classList.add('is-fixed');
+        }
+    </script>
+</body>
+</html>
